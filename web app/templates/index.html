@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mental Health Risk Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>🧠 Mental Health Risk Classifier</h1>
+    <form method="post">
+        <textarea name="post" rows="5" placeholder="Enter your thoughts here...">{{ request.form.post }}</textarea>
+        <br>
+        <button type="submit">Classify</button>
+    </form>
+
+    {% if result %}
+    <div class="result {{ result.color }}">
+        <h3>{{ result.emoji }} Prediction: <span>{{ result.label }}</span></h3>
+        <p><strong>Confidence Scores:</strong></p>
+        <ul>
+            {% for cls, score in result.probs.items() %}
+                <li>{{ cls }}: {{ score }}</li>
+            {% endfor %}
+        </ul>
+        <p><strong>Most Influential Words:</strong> {{ result.impactful_words | join(', ') }}</p>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>

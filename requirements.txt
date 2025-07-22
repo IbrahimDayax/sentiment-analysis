@@ -1,0 +1,9 @@
+flask
+torch
+scikit-learn
+joblib
+pandas
+numpy
+matplotlib
+seaborn
+gradio
